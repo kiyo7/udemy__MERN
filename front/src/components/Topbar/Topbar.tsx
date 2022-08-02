@@ -2,7 +2,7 @@ import { Search, Chat, Notifications } from "@mui/icons-material";
 
 import "./Topbar.css";
 
-export const Topbar = () => {
+export const Topbar: React.FC = () => {
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
