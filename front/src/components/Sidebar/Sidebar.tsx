@@ -7,6 +7,9 @@ import {
   Bookmark,
   Settings,
 } from "@mui/icons-material";
+import { SidebarFriend } from "../SidebarFriend/SidebarFriend";
+
+import { Users } from "../../dummyData";
 
 import "./Sidebar.css";
 
@@ -46,30 +49,9 @@ export const Sidebar: React.FC = () => {
         </ul>
         <hr className="sidebarHr" />
         <ul className="sidebarFriendList">
-          <li className="sidebarFriend">
-            <img
-              src="/assets/person/2.jpeg"
-              alt="avatar"
-              className="sidebarFriendImg"
-            />
-            <span className="sidebarFriendName">Kiyo</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/person/3.jpeg"
-              alt="avatar"
-              className="sidebarFriendImg"
-            />
-            <span className="sidebarFriendName">Tanaka</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/person/4.jpeg"
-              alt="avatar"
-              className="sidebarFriendImg"
-            />
-            <span className="sidebarFriendName">Naito</span>
-          </li>
+          {Users.map((user) => {
+            return <SidebarFriend key={user.id} user={user} />;
+          })}
         </ul>
       </div>
     </div>

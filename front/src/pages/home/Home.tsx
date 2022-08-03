@@ -1,3 +1,4 @@
+import { Rightbar } from "../../components/Rightbar/Rightbar";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { TimeLine } from "../../components/TimeLine/TimeLine";
 import { Topbar } from "../../components/Topbar/Topbar";
@@ -12,6 +13,7 @@ export const Home = () => {
       <div className="homeContainer">
         <Sidebar />
         <TimeLine />
+        <Rightbar />
       </div>
     </>
   );
