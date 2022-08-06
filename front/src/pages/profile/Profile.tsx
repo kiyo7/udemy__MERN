@@ -5,22 +5,22 @@ import { Topbar } from "../../components/Topbar/Topbar";
 import "./Profile.css";
 
 export const Profile: React.FC = () => {
+  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <>
       <Topbar />
-
       <div className="profile">
         <Sidebar />
-        <div className="profileRitht">
+        <div className="profileRight">
           <div className="profileRightTop">
             <div className="profileCover">
               <img
-                src="/assets/post/3.jpeg"
+                src={PUBLIC_FOLDER + "/post/3.jpeg"}
                 alt="cover"
                 className="profileCoverImg"
               />
               <img
-                src="/assets/person/1.jpeg"
+                src={PUBLIC_FOLDER + "/person/1.jpeg"}
                 alt="profileIcon"
                 className="profileUserImg"
               />
@@ -31,7 +31,7 @@ export const Profile: React.FC = () => {
             </div>
           </div>
           <div className="profileRightBottom">
-            <TimeLine />
+            <TimeLine username="佐藤" />
             <Rightbar profile />
           </div>
         </div>

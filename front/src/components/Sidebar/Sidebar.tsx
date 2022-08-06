@@ -11,6 +11,8 @@ import { SidebarFriend } from "../SidebarFriend/SidebarFriend";
 
 import { Users } from "../../dummyData";
 
+import { Link } from "react-router-dom";
+
 import "./Sidebar.css";
 
 export const Sidebar: React.FC = () => {
@@ -20,7 +22,9 @@ export const Sidebar: React.FC = () => {
         <ul className="sidebarList">
           <li className="sidebarListItem">
             <Home className="sidebarIcon" />
-            <span className="sidebarListItemText">ホーム</span>
+            <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+              <span className="sidebarListItemText">ホーム</span>
+            </Link>
           </li>
           <li className="sidebarListItem">
             <Search className="sidebarIcon" />
@@ -40,7 +44,12 @@ export const Sidebar: React.FC = () => {
           </li>
           <li className="sidebarListItem">
             <Person className="sidebarIcon" />
-            <span className="sidebarListItemText">プロフィール</span>
+            <Link
+              to="profile/kiyo"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <span className="sidebarListItemText">プロフィール</span>
+            </Link>
           </li>
           <li className="sidebarListItem">
             <Settings className="sidebarIcon" />

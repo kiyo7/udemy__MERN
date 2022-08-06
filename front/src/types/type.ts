@@ -5,11 +5,12 @@ export interface User {
 }
 
 export interface PostType {
-  id: number;
+  _id: number;
   desc: string;
-  photo: string;
+  img: string;
   date: string;
   userId: number;
-  like: number;
+  likes: number[];
   comment: number;
+  createdAt: string;
 }
