@@ -9,6 +9,8 @@ import { format } from "timeago.js";
 
 import { User } from "../../types/type";
 
+import { Link } from "react-router-dom";
+
 interface Props {
   post: PostType;
 }
@@ -20,12 +22,12 @@ export const Post: React.FC<Props> = ({ post }) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await axios.get<User>(`/users/${post.userId}`);
+      const response = await axios.get<User>(`/users?userId=${post.userId}`);
       console.log(response);
       setUser(response.data);
     };
     fetchUser();
-  }, []);
+  }, [post.userId]);
 
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -39,13 +41,15 @@ export const Post: React.FC<Props> = ({ post }) => {
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
-            <img
-              src={
-                user?.profilePicture || PUBLIC_FOLDER + "/person/noAvatar.png"
-              }
-              alt="avatar"
-              className="postProfileImg"
-            />
+            <Link to={`/profile/${user?.username}`}>
+              <img
+                src={
+                  user?.profilePicture || PUBLIC_FOLDER + "/person/noAvatar.png"
+                }
+                alt="avatar"
+                className="postProfileImg"
+              />
+            </Link>
             <span className="postUsername">{user?.username}</span>
             <span className="postDate">{format(post.createdAt)}</span>
           </div>

@@ -2,12 +2,13 @@ import { Online } from "../Online/Online";
 import "./Rightbar.css";
 
 import { Users } from "../../dummyData";
+import { User2 } from "../../types/type";
 
 interface Props {
-  profile?: boolean;
+  user?: User2;
 }
 
-export const Rightbar: React.FC<Props> = ({ profile }) => {
+export const Rightbar: React.FC<Props> = ({ user }) => {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const HomeRightbar = () => {
@@ -118,7 +119,7 @@ export const Rightbar: React.FC<Props> = ({ profile }) => {
   return (
     <div className="rightbar">
       <div className="rightbarWrapper">
-        {profile ? <ProfileRightbar /> : <HomeRightbar />}
+        {user ? <ProfileRightbar /> : <HomeRightbar />}
       </div>
     </div>
   );

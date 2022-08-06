@@ -4,6 +4,19 @@ export interface User {
   username: string;
 }
 
+export interface User2 {
+  username: string;
+  email: string;
+  password: string;
+  profilePicture: string;
+  coverPicture: string;
+  followers: string[];
+  followings: string[];
+  isAdmin: boolean;
+  desc: string;
+  city: string;
+}
+
 export interface PostType {
   _id: number;
   desc: string;

@@ -23,7 +23,7 @@ export const TimeLine: React.FC<Props> = ({ username }) => {
       setPosts(response.data);
     };
     fetchPosts();
-  }, []);
+  }, [username]);
 
   return (
     <div className="timeline">
