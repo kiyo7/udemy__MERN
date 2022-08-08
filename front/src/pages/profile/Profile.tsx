@@ -19,7 +19,6 @@ export const Profile: React.FC = () => {
   useEffect(() => {
     const fetchUser = async () => {
       const response = await axios.get<User2>(`/users?username=${username}`);
-      console.log(response);
       setUser(response.data);
     };
     fetchUser();

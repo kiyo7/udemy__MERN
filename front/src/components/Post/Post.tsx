@@ -23,7 +23,6 @@ export const Post: React.FC<Props> = ({ post }) => {
   useEffect(() => {
     const fetchUser = async () => {
       const response = await axios.get<User>(`/users?userId=${post.userId}`);
-      console.log(response);
       setUser(response.data);
     };
     fetchUser();
