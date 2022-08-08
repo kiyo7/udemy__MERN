@@ -8,7 +8,7 @@ export const Login: React.FC = () => {
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
 
-  const { user, isFetching, error, dispatch } = useContext<State>(AuthContext);
+  const { dispatch } = useContext<State>(AuthContext);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();

@@ -1,15 +1,40 @@
 import { Analytics, Face, Gif, Image } from "@mui/icons-material";
+import axios from "axios";
+import { FormEvent, useContext, useRef } from "react";
+import { AuthContext } from "../../state/AuthContext";
 import "./Share.css";
 
 export const Share: React.FC = () => {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  const desc = useRef<HTMLInputElement>(null);
+
+  const { user } = useContext(AuthContext);
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    const newPost = {
+      userId: user._id,
+      desc: desc.current?.value,
+    };
+    try {
+      axios.post("/posts", newPost);
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="share">
       <div className="shareWrapper">
         <div className="shareTop">
           <img
-            src={PUBLIC_FOLDER + "/person/noAvatar.png"}
+            src={
+              user?.profilePicture
+                ? PUBLIC_FOLDER + user?.profilePicture
+                : PUBLIC_FOLDER + "/person/noAvatar.png"
+            }
             alt="avatar"
             className="shareProfileImg"
           />
@@ -17,10 +42,11 @@ export const Share: React.FC = () => {
             type="text"
             className="shareInput"
             placeholder="今どうしてる？"
+            ref={desc}
           />
         </div>
         <hr className="shareHr" />
-        <div className="shareButtons">
+        <form onSubmit={(e) => handleSubmit(e)} className="shareButtons">
           <div className="shareOptions">
             <div className="shareOption">
               <Image className="shareIcon" htmlColor="blue" />
@@ -39,8 +65,10 @@ export const Share: React.FC = () => {
               <span className="shareOptionText">投票</span>
             </div>
           </div>
-          <button className="shareButton">投稿</button>
-        </div>
+          <button type="submit" className="shareButton">
+            投稿
+          </button>
+        </form>
       </div>
     </div>
   );

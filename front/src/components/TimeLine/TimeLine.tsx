@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Post } from "../Post/Post";
 import { Share } from "../Share/Share";
 import "./TimeLine.css";
 
 import axios from "axios";
 import { PostType } from "../../types/type";
+import { AuthContext } from "../../state/AuthContext";
 
 interface Props {
   username?: string;
@@ -13,17 +14,17 @@ interface Props {
 export const TimeLine: React.FC<Props> = ({ username }) => {
   const [posts, setPosts] = useState<PostType[]>([]);
 
+  const { user } = useContext(AuthContext);
+
   useEffect(() => {
     const fetchPosts = async () => {
       const response = username
         ? await axios.get(`/posts/profile/${username}`)
-        : await axios.get<PostType[]>(
-            "/posts/timeline/62e7e43141fd29fb885c677e"
-          );
+        : await axios.get<PostType[]>(`/posts/timeline/${user._id}`);
       setPosts(response.data);
     };
     fetchPosts();
-  }, [username]);
+  }, [user._id, username]);
 
   return (
     <div className="timeline">
