@@ -32,7 +32,7 @@ router.put("/:id", async (req, res) => {
 });
 
 //post delete
-router.delete("/:id", async (req, res) => {
+router.delete("/:id/delete", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (post.userId === req.body.userId) {

@@ -1,10 +1,12 @@
 import { Analytics, Face, Gif, Image } from "@mui/icons-material";
 import axios from "axios";
-import { FormEvent, useContext, useRef } from "react";
+import { FormEvent, useContext, useRef, useState } from "react";
 import { AuthContext } from "../../state/AuthContext";
 import "./Share.css";
 
 export const Share: React.FC = () => {
+  const [file, setFile] = useState<File | null>(null);
+
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const desc = useRef<HTMLInputElement>(null);
@@ -16,7 +18,22 @@ export const Share: React.FC = () => {
     const newPost = {
       userId: user._id,
       desc: desc.current?.value,
+      img: "",
     };
+
+    if (file) {
+      const data = new FormData();
+      const fileName = Date.now() + file.name;
+      data.append("name", fileName);
+      data.append("file", file);
+      newPost.img = fileName;
+
+      try {
+        await axios.post("/upload", data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
     try {
       axios.post("/posts", newPost);
       window.location.reload();
@@ -48,10 +65,17 @@ export const Share: React.FC = () => {
         <hr className="shareHr" />
         <form onSubmit={(e) => handleSubmit(e)} className="shareButtons">
           <div className="shareOptions">
-            <div className="shareOption">
+            <label htmlFor="file" className="shareOption">
               <Image className="shareIcon" htmlColor="blue" />
               <span className="shareOptionText">写真</span>
-            </div>
+              <input
+                type="file"
+                id="file"
+                accept=".png, .jpeg, .jpg"
+                style={{ display: "none" }}
+                onChange={(e) => setFile(e.target.files![0])}
+              />
+            </label>
             <div className="shareOption">
               <Gif className="shareIcon" htmlColor="hotpink" />
               <span className="shareOptionText">GIF</span>

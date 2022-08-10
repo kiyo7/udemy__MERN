@@ -62,17 +62,21 @@ export const Post: React.FC<Props> = ({ post }) => {
             <span className="postUsername">{user?.username}</span>
             <span className="postDate">{format(post.createdAt)}</span>
           </div>
-          <div className="postTopRight">
-            <MoreVert />
-          </div>
+          {currentUser._id === post.userId && (
+            <div className="postTopRight">
+              <MoreVert />
+            </div>
+          )}
         </div>
         <div className="postCenter">
           <span className="postText">{post.desc}</span>
-          <img
-            src={PUBLIC_FOLDER + post.img}
-            alt="contents"
-            className="postImg"
-          />
+          {post.img && (
+            <img
+              src={PUBLIC_FOLDER + post.img}
+              alt="contents"
+              className="postImg"
+            />
+          )}
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">

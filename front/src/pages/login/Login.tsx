@@ -1,4 +1,5 @@
 import { FormEvent, useContext, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { loginCall } from "../../dispatch";
 import { AuthContext } from "../../state/AuthContext";
 import { State } from "../../types/reducer";
@@ -9,6 +10,8 @@ export const Login: React.FC = () => {
   const password = useRef<HTMLInputElement>(null);
 
   const { dispatch } = useContext<State>(AuthContext);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -51,7 +54,12 @@ export const Login: React.FC = () => {
               ログイン
             </button>
             <span className="loginForgot">パスワードを忘れた方へ</span>
-            <button className="loginRegisterButton">アカウント作成</button>
+            <button
+              onClick={() => navigate("/register")}
+              className="loginRegisterButton"
+            >
+              アカウント作成する
+            </button>
           </form>
         </div>
       </div>

@@ -1,8 +1,9 @@
 import { Online } from "../Online/Online";
 import "./Rightbar.css";
 
-import { Users } from "../../dummyData";
 import { User2 } from "../../types/type";
+import { useContext } from "react";
+import { AuthContext } from "../../state/AuthContext";
 
 interface Props {
   user?: User2;
@@ -10,6 +11,8 @@ interface Props {
 
 export const Rightbar: React.FC<Props> = ({ user }) => {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  const { user: currentUser } = useContext(AuthContext);
 
   const HomeRightbar = () => {
     return (
@@ -30,11 +33,13 @@ export const Rightbar: React.FC<Props> = ({ user }) => {
           className="eventImg"
         />
         <h4 className="rightbarTitle">オンラインの友達</h4>
-        <ul className="rightbarFriendList">
-          {Users.map((user) => {
-            return <Online key={user.id} user={user} />;
-          })}
-        </ul>
+        {currentUser && (
+          <ul className="rightbarFriendList">
+            {currentUser.followings.map((friend: any, i: any) => {
+              return <Online key={i} user={friend} />;
+            })}
+          </ul>
+        )}
         <p className="promotionTitle">プロモーション広告</p>
         <img
           src={PUBLIC_FOLDER + "/promotion/promotion1.jpeg"}

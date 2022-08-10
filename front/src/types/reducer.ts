@@ -1,5 +1,3 @@
-import { Dispatch } from "react";
-
 export interface DispatchType {
   type: "LOGIN_START" | "LOGIN_SUCCESS" | "LOGIN_ERROR";
   payload?: any;

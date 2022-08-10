@@ -21,7 +21,14 @@ export const TimeLine: React.FC<Props> = ({ username }) => {
       const response = username
         ? await axios.get(`/posts/profile/${username}`)
         : await axios.get<PostType[]>(`/posts/timeline/${user._id}`);
-      setPosts(response.data);
+      setPosts(
+        response.data.sort((post1: any, post2: any) => {
+          return (
+            new Date(post2.createdAt).getTime() -
+            new Date(post1.createdAt).getTime()
+          );
+        })
+      );
     };
     fetchPosts();
   }, [user._id, username]);

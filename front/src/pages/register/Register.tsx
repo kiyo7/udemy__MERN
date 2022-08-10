@@ -72,7 +72,14 @@ export const Register: React.FC = () => {
             <button type="submit" className="registerButton">
               サインアップ
             </button>
-            <button className="registerRegisterButton">ログイン</button>
+            <button
+              onClick={() => {
+                navigate("/login");
+              }}
+              className="registerRegisterButton"
+            >
+              ログインする
+            </button>
           </form>
         </div>
       </div>

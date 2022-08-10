@@ -9,13 +9,15 @@ import {
 } from "@mui/icons-material";
 import { SidebarFriend } from "../SidebarFriend/SidebarFriend";
 
-import { Users } from "../../dummyData";
-
 import { Link } from "react-router-dom";
 
 import "./Sidebar.css";
+import { AuthContext } from "../../state/AuthContext";
+import { useContext } from "react";
 
 export const Sidebar: React.FC = () => {
+  const { user } = useContext(AuthContext);
+
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -57,11 +59,13 @@ export const Sidebar: React.FC = () => {
           </li>
         </ul>
         <hr className="sidebarHr" />
-        <ul className="sidebarFriendList">
-          {Users.map((user) => {
-            return <SidebarFriend key={user.id} user={user} />;
-          })}
-        </ul>
+        {user && (
+          <ul className="sidebarFriendList">
+            {user.followings.map((friend: any, i: any) => {
+              return <SidebarFriend key={i} user={friend} />;
+            })}
+          </ul>
+        )}
       </div>
     </div>
   );
